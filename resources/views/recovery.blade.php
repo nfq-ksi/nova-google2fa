@@ -40,7 +40,7 @@
             <h2 class="p-2">Recovery codes</h2>
             @csrf
             <p class="p-2">
-                Recovery codes are used to access your account in the event you cannot recive two-factor
+                Recovery codes are used to access your account in the event you cannot receive two-factor
                 authentication codes.
             </p>
             <p class="p-2 no-print">
