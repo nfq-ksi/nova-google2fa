@@ -45,13 +45,18 @@ class Google2fa
                 ->setChars(config('lifeonscreen2fa.recovery_codes.chars_in_block'))
                 ->toArray();
 
-            $user2faModel = config('lifeonscreen2fa.models.user2fa');
-            $user2faModel::where('user_id', auth()->user()->id)->delete();
+            $recoveryHashes = $data['recovery'];
+            array_walk($recoveryHashes, function (&$value) {
+                $value = password_hash($value, config('lifeonscreen2fa.recovery_codes.hashing_algorithm'));
+            });
 
+            $user2faModel = config('lifeonscreen2fa.models.user2fa');
+
+            $user2faModel::where('user_id', auth()->user()->id)->delete();
             $user2fa = new $user2faModel();
             $user2fa->user_id = auth()->user()->id;
             $user2fa->google2fa_secret = $secretKey;
-            $user2fa->recovery = json_encode($data['recovery']);
+            $user2fa->recovery = json_encode($recoveryHashes);
             $user2fa->save();
 
             return response(view('nova-google2fa::recovery', $data));

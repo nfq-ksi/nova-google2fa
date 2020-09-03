@@ -75,7 +75,7 @@ class Google2fa extends Tool
      */
     public function authenticate()
     {
-        if ($recover = Request::get('recover')) {
+        if ($recover = request()->input('recover')) {
             if ($this->isRecoveryValid($recover, json_decode(auth()->user()->user2fa->recovery, true)) === false) {
                 $data['error'] = 'Recovery key is invalid.';
 
