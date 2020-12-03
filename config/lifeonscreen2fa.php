@@ -12,18 +12,12 @@ return [
         /**
          * Change this variable to path to user model.
          */
-        'user'    => 'App\User',
+        'user'    => 'App\Models\Admin\Admin',
 
         /**
          * Change this if you need a custom connector
          */
         'user2fa' => User2fa::class,
-    ],
-    'tables' => [
-        /**
-         * Table in which users are stored.
-         */
-        'user' => 'users',
     ],
 
     'recovery_codes' => [

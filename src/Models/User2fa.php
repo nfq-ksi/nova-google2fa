@@ -14,7 +14,7 @@ class User2fa extends Model
     /**
      * @var string
      */
-    protected $table   = 'user_2fa';
+    protected $table   = 'admin_2fa';
 
     /**
      * @return BelongsTo

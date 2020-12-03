@@ -35,7 +35,6 @@ class Google2fa
             return $next($request);
         }
         if (empty(auth()->user()->user2fa) || auth()->user()->user2fa->google2fa_enable === 0) {
-
             $google2fa = new G2fa();
             $recovery = new Recovery();
             $secretKey = $google2fa->generateSecretKey();
@@ -52,9 +51,9 @@ class Google2fa
 
             $user2faModel = config('lifeonscreen2fa.models.user2fa');
 
-            $user2faModel::where('user_id', auth()->user()->id)->delete();
+            $user2faModel::where('admin_id', auth()->user()->id)->delete();
             $user2fa = new $user2faModel();
-            $user2fa->user_id = auth()->user()->id;
+            $user2fa->admin_id = auth()->user()->id;
             $user2fa->google2fa_secret = $secretKey;
             $user2fa->recovery = json_encode($recoveryHashes);
             $user2fa->save();
